@@ -15,7 +15,7 @@ const center = {
 }
 
 const getDistance = (p1, p2)  =>{
-  return Math.sqrt(Math.pow(p1.x - p2.x, 2) + Math.pow(p1.y - p2.y, 2));
+  return Math.abs(p1.x - p2.x) + Math.abs(p1.y - p2.y);
 }
 
 const moveIn = (tx, ty) => {
@@ -108,6 +108,10 @@ const moveToCenter = () => moveToEnemy(center);
 
   if (safeIsCurrent) {
     return;
+  }
+
+  if (sortedEnemies[0].distance <= ap) {
+    return moveToEnemy(sortedEnemies[0]);
   }
 
   return moveToCenter();
