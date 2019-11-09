@@ -78,7 +78,7 @@ const moveToCenter = () => moveToEnemy(center);
   }
 
   let safeIsCurrent = false;
-  
+  let safeC;
   for (let i = 0; i < size; i++) {
     for (let j = 0; j < size; j++) {
       const coord = { x: i, y: j };
@@ -101,9 +101,17 @@ const moveToCenter = () => moveToEnemy(center);
 
 
       if (isSafe && canMove) {
-        return API.move(coord.x, coord.y);
+        safeC = coord;
+
+        if (Math.random() < .25) {
+          return API.move(coord.x, coord.y);
+        }
       }
     }
+  }
+
+  if (safeC) {
+    return API.move(safeC.x, safeC.y);
   }
 
   if (safeIsCurrent) {
